@@ -73,7 +73,7 @@ const Home = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {[
                         { icon: <Clock className="text-yellow-500" />, title: "Tempo Médio", desc: "Assado por 2 horas" },
-                        { icon: <MapPin className="text-yellow-500" />, title: "Localização", desc: "Rodovia BR 101 Sul - Novo Trassado, 177" },
+                        { icon: <MapPin className="text-yellow-500" />, title: "Localização", desc: "Rodovia BR 101 Sul - Novo Traçado, 177" },
                         { icon: <Utensils className="text-yellow-500" />, title: "Ingredientes", desc: "Cortes Premium e Tempero Secreto" },
                     ].map((info, idx) => (
                         <motion.div
@@ -95,7 +95,7 @@ const Home = () => {
             <section id="menu" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
                 <div className="flex justify-between items-end mb-8">
                     <div>
-                        <h2 className="text-3xl font-extrabold text-zinc-100 mb-2">Destaques do Dia</h2>
+                        <h2 className="text-3xl font-extrabold text-zinc-100 mb-2">Cardápio do Dia</h2>
                         <div className="h-1 w-20 bg-yellow-500 rounded-full"></div>
                     </div>
                 </div>

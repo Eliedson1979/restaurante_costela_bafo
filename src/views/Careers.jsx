@@ -84,7 +84,7 @@ const Careers = () => {
                             </div>
                             <div className="bg-zinc-950/50 px-6 py-4 border-t border-zinc-800">
                                 <a
-                                    href="mailto:r.costelanobafo@gmail.com?subject=Candidatura - {position.title}"
+                                    href={`mailto:r.costelanobafo@gmail.com?subject=Candidatura - ${position.title}`}
                                     className="inline-flex items-center space-x-2 bg-yellow-500 text-black px-6 py-3 rounded-xl font-bold hover:bg-yellow-600 transition-all shadow-lg shadow-yellow-900/20"
                                 >
                                     <span>Candidatar-se</span>

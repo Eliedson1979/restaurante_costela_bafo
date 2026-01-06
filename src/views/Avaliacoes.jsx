@@ -174,25 +174,25 @@ const ReviewCard = ({ review, onUpdateReview }) => {
   };
 
     const handleDislike = async () => {
-    console.log(`[Dislike] Tentando descurtir a avaliação ID: ${review.id}`);
+    console.log(`[Descurtida] Tentando descurtir a avaliação ID: ${review.id}`);
     if (isDisliking) return;
     setIsDisliking(true);
 
-    const newDislikes = (review.dislikes || 0) + 1;
+    const newDislikes = (review.descurtidas || 0) + 1;
 
     const { data, error } = await supabase
       .from('reviews')
-      .update({ dislikes: newDislikes })
+      .update({ descurtidas: newDislikes })
       .eq('id', review.id)
       .select();
 
-    console.log('[Dislike] Resposta do Supabase:', { data, error });
+    console.log('[Descurtida] Resposta do Supabase:', { data, error });
 
     if (!error && data && data.length > 0) {
-      console.log('[Dislike] Sucesso! Atualizando a interface com:', data[0]);
+      console.log('[Descurtida] Sucesso! Atualizando a interface com:', data[0]);
       onUpdateReview(data[0]);
     } else if (error) {
-      console.error('[Dislike] Erro do Supabase:', error);
+      console.error('[Descurtida] Erro do Supabase:', error);
     }
 
     setIsDisliking(false);
@@ -219,7 +219,7 @@ const ReviewCard = ({ review, onUpdateReview }) => {
         </button>
                 <button onClick={handleDislike} disabled={isDisliking} className="flex items-center space-x-2 text-zinc-400 hover:text-red-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
             <ThumbsDown size={18} />
-            <span className="font-medium">{review.dislikes}</span>
+            <span className="font-medium">{review.descurtidas}</span>
         </button>
     </div>
   </div>

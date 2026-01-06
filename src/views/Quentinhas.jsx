@@ -252,7 +252,7 @@ const Quentinhas = () => {
                                     <option value="figado">Figado Acebolado </option>
                                     <option value="carne">Carne Guisada </option>
                                     <option value="galinha">Galinha Guisada </option>
-                                    <option value="peito_frango">Isca peito de franco </option>
+                                    <option value="peito_frango">Isca de Peito de Frango </option>
 
                                 </select>
                             </div>

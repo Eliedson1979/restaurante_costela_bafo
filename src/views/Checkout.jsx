@@ -20,7 +20,7 @@ const Checkout = () => {
     // Configurações do Recebedor
     const pixKey = "+5581983357326";
     const merchantName = "Restaurante Costela no Bafo";
-    const merchantCity = "Jaboatao dos Guararapes";
+    const merchantCity = "Jaboatão dos Guararapes";
 
     // Criar ou recuperar pedido automaticamente
     useEffect(() => {
