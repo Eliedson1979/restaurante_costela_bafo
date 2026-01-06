@@ -1,16 +1,67 @@
-# React + Vite
+# Restaurante Costela no Bafo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é o projeto de front-end para a aplicação web do Restaurante Costela no Bafo. Desenvolvido com React e Vite, o sistema oferece uma interface moderna e responsiva para visualização de cardápio, realização de pedidos e pagamento via PIX.
 
-Currently, two official plugins are available:
+## ✨ Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Cardápio digital interativo
+- Carrinho de compras funcional
+- Checkout com geração de QR Code PIX
+- Autenticação de usuários
+- Área administrativa para gerenciamento de pedidos (funcionalidade de back-end associada)
 
-## React Compiler
+## 🚀 Tecnologias Utilizadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Front-end:**
+  - [React](https://react.dev/) (com [Vite](https://vitejs.dev/))
+  - [Tailwind CSS](https://tailwindcss.com/) para estilização
+  - [Framer Motion](https://www.framer.com/motion/) para animações
+  - [Lucide React](https://lucide.dev/) para ícones
+  - [React Router](https://reactrouter.com/) para roteamento
 
-## Expanding the ESLint configuration
+- **Back-end & Banco de Dados:**
+  - [Supabase](https://supabase.com/) como plataforma de Back-end as a Service (BaaS)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📋 Pré-requisitos
+
+- [Node.js](https://nodejs.org/en) (versão 18 ou superior)
+- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
+
+## ⚙️ Como Começar
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone https://github.com/seu-usuario/restaurante-costela-no-bafo.git
+    cd restaurante-costela-no-bafo
+    ```
+
+2.  **Instale as dependências:**
+    ```bash
+    npm install
+    ```
+
+3.  **Configure as variáveis de ambiente:**
+    - Crie um arquivo `.env` na raiz do projeto, copiando o exemplo de `.env.example` (se existir) ou criando um novo.
+    - Adicione as seguintes variáveis:
+      ```env
+      VITE_SUPABASE_URL="SUA_URL_DO_SUPABASE"
+      VITE_SUPABASE_ANON_KEY="SUA_CHAVE_ANON_DO_SUPABASE"
+      ```
+    > As chaves podem ser encontradas no painel do seu projeto no Supabase, em **Project Settings > API**.
+
+4.  **Execute o projeto:**
+    ```bash
+    npm run dev
+    ```
+    A aplicação estará disponível em `http://localhost:5173` (ou outra porta, se a 5173 estiver em uso).
+
+## 📜 Scripts Disponíveis
+
+- `npm run dev`: Inicia o servidor de desenvolvimento.
+- `npm run build`: Compila o projeto para produção.
+- `npm run lint`: Executa o linter para análise de código.
+- `npm run preview`: Inicia um servidor local para visualizar o build de produção.
+
+## 🗃️ Banco de Dados
+
+Os scripts SQL para a configuração inicial do banco de dados e das políticas de segurança (RLS) no Supabase estão localizados no diretório `/database`. Eles devem ser executados no **SQL Editor** do seu projeto Supabase para garantir que as tabelas e permissões estejam configuradas corretamente.
