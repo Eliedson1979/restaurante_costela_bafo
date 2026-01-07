@@ -95,7 +95,7 @@ const Home = () => {
             <section id="menu" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
                 <div className="flex justify-between items-end mb-8">
                     <div>
-                        <h2 className="text-3xl font-extrabold text-zinc-100 mb-2">Cardápio do Dia</h2>
+                        <h2 className="text-3xl font-extrabold text-zinc-100 mb-2">Cardápio do Dias</h2>
                         <div className="h-1 w-20 bg-yellow-500 rounded-full"></div>
                     </div>
                 </div>
