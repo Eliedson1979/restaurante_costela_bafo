@@ -6,12 +6,13 @@ import { useAuth } from '../context/AuthContext';
 import { supabase } from '../utils/supabase';
 import {
     Loader2, Package, CheckCircle2, Clock, MapPin, DollarSign, User,
-    ShoppingBag, Plus, Edit2, Trash2, X, Save
+    ShoppingBag, Plus, Edit2, Trash2, X, Save, Coffee
 } from 'lucide-react';
 
 const AdminDashboard = () => {
     const { user, loading: authLoading } = useAuth();
     const [activeTab, setActiveTab] = useState('orders'); // 'orders' or 'products'
+    const [activeProductTab, setActiveProductTab] = useState('all'); // 'all' or 'breakfast'
 
     // Orders state
     const [orders, setOrders] = useState([]);
@@ -21,6 +22,8 @@ const AdminDashboard = () => {
     // Products state
     const [products, setProducts] = useState([]);
     const [productsLoading, setProductsLoading] = useState(true);
+    const [breakfastProducts, setBreakfastProducts] = useState([]);
+    const [breakfastProductsLoading, setBreakfastProductsLoading] = useState(true);
     const [showProductForm, setShowProductForm] = useState(false);
     const [editingProduct, setEditingProduct] = useState(null);
     const [productForm, setProductForm] = useState({
@@ -64,6 +67,7 @@ const AdminDashboard = () => {
     // Fetch products
     useEffect(() => {
         fetchProducts();
+        fetchBreakfastProducts();
     }, []);
 
     const fetchProducts = async () => {
@@ -75,6 +79,18 @@ const AdminDashboard = () => {
             console.error('Erro ao buscar produtos:', err);
         } finally {
             setProductsLoading(false);
+        }
+    };
+
+    const fetchBreakfastProducts = async () => {
+        setBreakfastProductsLoading(true);
+        try {
+            const data = await ProductModel.getProductsByCategory('Café da Manhã');
+            setBreakfastProducts(data || []);
+        } catch (err) {
+            console.error('Erro ao buscar produtos de café da manhã:', err);
+        } finally {
+            setBreakfastProductsLoading(false);
         }
     };
 
@@ -91,7 +107,9 @@ const AdminDashboard = () => {
             };
 
             // Adicionar categoria apenas se não estiver vazia
-            if (productForm.category && productForm.category.trim()) {
+            if (activeTab === 'breakfast') {
+                productData.category = 'Café da Manhã';
+            } else if (productForm.category && productForm.category.trim()) {
                 productData.category = productForm.category.trim();
             }
 
@@ -106,6 +124,7 @@ const AdminDashboard = () => {
             }
 
             await fetchProducts();
+            await fetchBreakfastProducts();
             resetProductForm();
             alert(editingProduct ? 'Produto atualizado com sucesso!' : 'Produto criado com sucesso!');
         } catch (err) {
@@ -141,7 +160,8 @@ const AdminDashboard = () => {
 
         try {
             await ProductModel.delete(id);
-            fetchProducts();
+            await fetchProducts();
+            await fetchBreakfastProducts();
         } catch (err) {
             console.error('Erro ao excluir produto:', err);
             alert('Erro ao excluir produto.');
@@ -230,7 +250,17 @@ const AdminDashboard = () => {
                             }`}
                     >
                         <ShoppingBag size={18} />
-                        Produtos
+                        Almoços
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('breakfast')}
+                        className={`flex items-center gap-2 px-6 py-3 font-bold uppercase text-sm transition-all ${activeTab === 'breakfast'
+                            ? 'text-yellow-500 border-b-2 border-yellow-500'
+                            : 'text-zinc-500 hover:text-zinc-300'
+                            }`}
+                    >
+                        <Coffee size={18} />
+                        Café da Manhã
                     </button>
                 </div>
 
@@ -351,8 +381,8 @@ const AdminDashboard = () => {
                     </div>
                 )}
 
-                {/* Products Tab */}
-                {activeTab === 'products' && (
+                {/* Products Tabs - Main and Breakfast */}
+                {(activeTab === 'products' || activeTab === 'breakfast') && (
                     <div>
                         {/* Add Product Button */}
                         <div className="mb-8">
@@ -488,18 +518,18 @@ const AdminDashboard = () => {
                         </AnimatePresence>
 
                         {/* Products List */}
-                        {productsLoading ? (
+                        {(activeTab === 'products' && productsLoading) || (activeTab === 'breakfast' && breakfastProductsLoading) ? (
                             <div className="flex justify-center py-20">
                                 <Loader2 className="animate-spin text-yellow-500" size={48} />
                             </div>
-                        ) : products.length === 0 ? (
+                        ) : (activeTab === 'products' && products.length === 0) || (activeTab === 'breakfast' && breakfastProducts.length === 0) ? (
                             <div className="text-center py-20 bg-zinc-900/30 rounded-3xl border border-zinc-800/50">
                                 <ShoppingBag className="mx-auto h-16 w-16 text-zinc-700 mb-4" />
                                 <h3 className="text-xl font-bold text-zinc-500 uppercase">Nenhum produto cadastrado</h3>
                             </div>
                         ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {products.map((product) => (
+                                {(activeTab === 'products' ? products : breakfastProducts).map((product) => (
                                     <motion.div
                                         key={product.id}
                                         initial={{ opacity: 0, y: 20 }}

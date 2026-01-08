@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { ShoppingCart, Menu, X, UtensilsCrossed, Phone, Box, CreditCard, User, LogOut, LogIn, Briefcase } from 'lucide-react';
+import { ShoppingCart, Menu, X, UtensilsCrossed, Phone, Box, CreditCard, User, LogOut, LogIn, Briefcase, Coffee } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -13,10 +13,10 @@ const Navbar = () => {
 
     const navLinks = [
         { title: 'Cardápio', path: '/', icon: <UtensilsCrossed size={18} /> },
+        { title: 'Café da Manhã', path: '/cafe-da-manha', icon: <Coffee size={18} /> },
         { title: 'Quentinhas', path: '/quentinhas', icon: <Box size={18} /> },
         { title: 'Pagamento', path: '/pagamento', icon: <CreditCard size={18} /> },
         { title: 'Contato', path: '/contato', icon: <Phone size={18} /> },
-        { title: 'Trabalhe Conosco', path: '/trabalhe-conosco', icon: <Briefcase size={18} /> },
     ];
 
     return (

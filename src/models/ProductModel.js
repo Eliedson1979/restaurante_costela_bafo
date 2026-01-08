@@ -15,6 +15,21 @@ export class ProductModel {
         return data;
     }
 
+    static async getProductsByCategory(category) {
+        const { data, error } = await supabase
+            .from('products')
+            .select('*')
+            .eq('category', category)
+            .order('id', { ascending: true });
+
+        if (error) {
+            console.error(`Erro ao buscar produtos da categoria ${category}:`, error);
+            return [];
+        }
+
+        return data;
+    }
+
     static async getById(id) {
         const { data, error } = await supabase
             .from('products')
