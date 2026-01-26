@@ -9,6 +9,28 @@ const Home = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const [isOpenStatus, setIsOpenStatus] = useState(false);
+
+    useEffect(() => {
+        const checkStatus = () => {
+            const now = new Date();
+            const day = now.getDay(); // 0 is Sunday, 1-6 is Mon-Sat
+            const hour = now.getHours();
+
+            // Monday (1) to Saturday (6)
+            // From 06:00 to 14:59 (stays open until 15:00)
+            if (day >= 1 && day <= 6 && hour >= 6 && hour < 15) {
+                setIsOpenStatus(true);
+            } else {
+                setIsOpenStatus(false);
+            }
+        };
+
+        checkStatus();
+        const interval = setInterval(checkStatus, 60000); // Check every minute
+        return () => clearInterval(interval);
+    }, []);
+
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -38,6 +60,19 @@ const Home = () => {
                     />
                 </div>
                 <div className="relative text-center text-white px-4">
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex justify-center mb-4"
+                    >
+                        <span className={`flex items-center space-x-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border shadow-lg ${isOpenStatus
+                                ? 'bg-green-500/20 border-green-500/50 text-green-400'
+                                : 'bg-red-500/20 border-red-500/50 text-red-400'
+                            }`}>
+                            <span className={`w-2 h-2 rounded-full animate-pulse ${isOpenStatus ? 'bg-green-500' : 'bg-red-500'}`}></span>
+                            <span>{isOpenStatus ? 'Aberto Agora' : 'Fechado Agora'}</span>
+                        </span>
+                    </motion.div>
                     <motion.h1
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -74,19 +109,24 @@ const Home = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {[
-                        { icon: <Clock className="text-yellow-500" />, title: "Tempo Médio", desc: "Assado por 2 horas" },
+                        {
+                            icon: <Clock className="text-yellow-500" />,
+                            title: "Funcionamento",
+                            desc: "Seg à Sáb: 06h às 15h",
+                            highlight: true
+                        },
                         { icon: <MapPin className="text-yellow-500" />, title: "Localização", desc: "Rodovia BR 101 Sul - Novo Traçado, 177" },
                         { icon: <Utensils className="text-yellow-500" />, title: "Ingredientes", desc: "Cortes Premium e Tempero Secreto" },
                     ].map((info, idx) => (
                         <motion.div
                             key={idx}
                             whileHover={{ y: -5 }}
-                            className="bg-zinc-900/50 backdrop-blur-sm p-6 rounded-2xl shadow-sm border border-zinc-800 flex items-center space-x-4"
+                            className={`bg-zinc-900/50 backdrop-blur-sm p-6 rounded-2xl shadow-sm border ${info.highlight ? 'border-yellow-500/50' : 'border-zinc-800'} flex items-center space-x-4`}
                         >
                             <div className="bg-zinc-800 p-3 rounded-xl">{info.icon}</div>
                             <div>
                                 <h4 className="font-bold text-zinc-100">{info.title}</h4>
-                                <p className="text-zinc-400 text-sm">{info.desc}</p>
+                                <p className="text-zinc-400 text-sm whitespace-nowrap">{info.desc}</p>
                             </div>
                         </motion.div>
                     ))}

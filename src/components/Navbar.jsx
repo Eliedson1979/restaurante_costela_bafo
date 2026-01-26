@@ -17,6 +17,7 @@ const Navbar = () => {
         { title: 'Quentinhas', path: '/quentinhas', icon: <Box size={18} /> },
         { title: 'Pagamento', path: '/pagamento', icon: <CreditCard size={18} /> },
         { title: 'Contato', path: '/contato', icon: <Phone size={18} /> },
+
     ];
 
     return (

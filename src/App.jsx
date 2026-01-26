@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './views/Home';
 import Cart from './views/Cart';
@@ -44,7 +44,7 @@ function App() {
                 <h2 className="text-3xl font-black mb-4">Restaurante <span className="text-yellow-500">Costela no Bafo</span></h2>
                 <p className="text-zinc-400 mb-8 max-w-md mx-auto italic">Tradicionalismo e sabor em cada pedaço. O melhor churrasco da cidade direto na sua mesa.</p>
                 <div className="flex justify-center space-x-6 mb-8">
-                  <a href="/trabalhe-conosco" className="text-zinc-400 hover:text-yellow-500 transition-colors">Trabalhe Conosco</a>
+                  <Link to="/trabalhe-conosco" className="text-zinc-400 hover:text-yellow-500 transition-colors">Trabalhe Conosco</Link>
                 </div>
                 <div className="h-px bg-zinc-800 mb-8"></div>
                 <p className="text-zinc-500 text-sm">© 2025 Restaurante Costela no Bafo - Todos os direitos reservados.</p>
