@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 
-const QUENTINHA_PRICE = 18.00;
+const QUENTINHA_PRICE = 20.00;
 
 const Quentinhas = () => {
     const { user } = useAuth();
