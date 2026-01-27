@@ -44,7 +44,7 @@ const Login = () => {
                         />
                     </div>
                     <h1 className="text-3xl font-black italic uppercase tracking-tighter">Bem-vindo de Volta</h1>
-                    <p className="opacity-80 font-medium">O melhor churrasco da região direto para você.</p>
+                    <p className="opacity-80 font-medium">O melhor restaurante da região direto para você.</p>
                 </div>
 
                 <form onSubmit={handleLogin} className="p-8 space-y-6">

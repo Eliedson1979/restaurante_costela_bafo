@@ -60,19 +60,7 @@ const Home = () => {
                     />
                 </div>
                 <div className="relative text-center text-white px-4">
-                    <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="flex justify-center mb-4"
-                    >
-                        <span className={`flex items-center space-x-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border shadow-lg ${isOpenStatus
-                                ? 'bg-green-500/20 border-green-500/50 text-green-400'
-                                : 'bg-red-500/20 border-red-500/50 text-red-400'
-                            }`}>
-                            <span className={`w-2 h-2 rounded-full animate-pulse ${isOpenStatus ? 'bg-green-500' : 'bg-red-500'}`}></span>
-                            <span>{isOpenStatus ? 'Aberto Agora' : 'Fechado Agora'}</span>
-                        </span>
-                    </motion.div>
+
                     <motion.h1
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -108,28 +96,60 @@ const Home = () => {
             {/* Info Cards */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {[
-                        {
-                            icon: <Clock className="text-yellow-500" />,
-                            title: "Funcionamento",
-                            desc: "Seg à Sáb: 06h às 15h",
-                            highlight: true
-                        },
-                        { icon: <MapPin className="text-yellow-500" />, title: "Localização", desc: "Rodovia BR 101 Sul - Novo Traçado, 177" },
-                        { icon: <Utensils className="text-yellow-500" />, title: "Ingredientes", desc: "Cortes Premium e Tempero Secreto" },
-                    ].map((info, idx) => (
-                        <motion.div
-                            key={idx}
-                            whileHover={{ y: -5 }}
-                            className={`bg-zinc-900/50 backdrop-blur-sm p-6 rounded-2xl shadow-sm border ${info.highlight ? 'border-yellow-500/50' : 'border-zinc-800'} flex items-center space-x-4`}
-                        >
-                            <div className="bg-zinc-800 p-3 rounded-xl">{info.icon}</div>
-                            <div>
-                                <h4 className="font-bold text-zinc-100">{info.title}</h4>
-                                <p className="text-zinc-400 text-sm whitespace-nowrap">{info.desc}</p>
+                    {/* Card de Funcionamento com Status em Tempo Real */}
+                    <motion.div
+                        whileHover={{ y: -5 }}
+                        className={`relative overflow-hidden bg-zinc-900/40 backdrop-blur-xl p-6 rounded-3xl shadow-2xl border transition-all duration-300 ${isOpenStatus ? 'border-green-500/30 shadow-green-900/10' : 'border-zinc-800 shadow-black/50'}`}
+                    >
+                        <div className="flex items-center justify-between mb-4">
+                            <div className={`p-3 rounded-2xl ${isOpenStatus ? 'bg-green-500/10 text-green-400' : 'bg-zinc-800 text-yellow-500'}`}>
+                                <Clock size={24} />
                             </div>
-                        </motion.div>
-                    ))}
+                            <div className={`flex items-center space-x-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter border shadow-sm ${isOpenStatus
+                                ? 'bg-green-500/10 border-green-500/30 text-green-400'
+                                : 'bg-red-500/10 border-red-500/30 text-red-400'
+                                }`}>
+                                <span className={`w-1.5 h-1.5 rounded-full ${isOpenStatus ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}></span>
+                                <span>{isOpenStatus ? 'Aberto' : 'Fechado'}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 className="font-bold text-zinc-100 text-lg mb-1">Funcionamento</h4>
+                            <p className="text-zinc-400 text-sm font-medium">Seg à Sáb: 06h às 15h</p>
+                        </div>
+                        {/* Efeito de brilho sutil */}
+                        {isOpenStatus && (
+                            <div className="absolute -right-4 -top-4 w-24 h-24 bg-green-500/5 blur-3xl rounded-full"></div>
+                        )}
+                    </motion.div>
+
+                    {/* Card de Localização */}
+                    <motion.div
+                        whileHover={{ y: -5 }}
+                        className="bg-zinc-900/40 backdrop-blur-xl p-6 rounded-3xl shadow-2xl border border-zinc-800 flex flex-col justify-between hover:border-yellow-500/30 transition-all duration-300"
+                    >
+                        <div className="bg-zinc-800 w-fit p-3 rounded-2xl text-yellow-500 mb-4">
+                            <MapPin size={24} />
+                        </div>
+                        <div>
+                            <h4 className="font-bold text-zinc-100 text-lg mb-1">Localização</h4>
+                            <p className="text-zinc-400 text-sm leading-relaxed">Rodovia BR 101 Sul - Novo Traçado, 177</p>
+                        </div>
+                    </motion.div>
+
+                    {/* Card de Ingredientes */}
+                    <motion.div
+                        whileHover={{ y: -5 }}
+                        className="bg-zinc-900/40 backdrop-blur-xl p-6 rounded-3xl shadow-2xl border border-zinc-800 flex flex-col justify-between hover:border-yellow-500/30 transition-all duration-300"
+                    >
+                        <div className="bg-zinc-800 w-fit p-3 rounded-2xl text-yellow-500 mb-4">
+                            <Utensils size={24} />
+                        </div>
+                        <div>
+                            <h4 className="font-bold text-zinc-100 text-lg mb-1">Qualidade</h4>
+                            <p className="text-zinc-400 text-sm leading-relaxed">Cortes Premium e Tempero Secreto da Casa</p>
+                        </div>
+                    </motion.div>
                 </div>
             </div>
 
